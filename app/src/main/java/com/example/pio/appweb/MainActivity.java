@@ -2,14 +2,20 @@ package com.example.pio.appweb;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.pio.appweb.clientserver.Client;
+import com.example.pio.appweb.clientserver.Server;
 
 public class MainActivity extends AppCompatActivity {
 
 
     private TextView textViewEvent;
+    private Server server;
+    private Client client;
+    private Button button;
 
 
     @Override
@@ -17,28 +23,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textViewEvent = (TextView)findViewById(R.id.edit_text_event);
+        server = new Server(this);
+        server.runServer();
+
+        textViewEvent = (TextView) findViewById(R.id.edit_text_event);
+        button = (Button) findViewById(R.id.button_send_event);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                client = new Client("172.16.20.157", 8080, textViewEvent.getText().toString());
+                client.beginConnection();
+            }
+        });
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
