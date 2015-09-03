@@ -6,23 +6,20 @@ package com.example.pio.appweb.internet;
 public class Event {
 
     private String event_name;
-    private String id;
+    private String element_id;
 
     public Event(String id, String name){
 
-        this.id = id;
+        this.element_id = id;
         this.event_name = name;
     }
 
-
-
-
     public String getId() {
-        return id;
+        return element_id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.element_id = id;
     }
 
     public String getEventName() {

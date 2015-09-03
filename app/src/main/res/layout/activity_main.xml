@@ -36,5 +36,14 @@
         android:text="Send!"
         android:background="@drawable/button_selector"
         />
+    <Button
+        android:layout_marginTop="20dp"
+        android:id="@+id/button_check_events"
+        android:layout_below="@+id/button_send_event"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Check events!"
+        android:background="@drawable/button_selector"
+        />
 
 </RelativeLayout>

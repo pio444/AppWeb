@@ -11,7 +11,7 @@ public interface WebAPI {
 
     String baseURL = "http://172.16.20.179:3000";
 
-    @POST("/events")
+    @POST("/api/events")
     void sendEvent(@Body Event event, Callback<Event> response);
 
 

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.media.RingtoneManager;
 
 import com.example.pio.appweb.R;
+import com.example.pio.appweb.util.NotificationCaller;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -31,7 +32,7 @@ public final class Server {
 
     public Server(Activity activity) {
         this.activity = activity;
-        caller = new NotificationCaller();
+        caller = new NotificationCaller(activity);
     }
 
     public void runServer() {
@@ -72,7 +73,6 @@ public final class Server {
                     String msgReply = "Hello from Server, you are #" + count;
                     dataOutputStream.writeUTF(msgReply);
                     if (dataOutputStream != null) {
-
                         caller.setTitleAndContent("Server respond !!!", msgReply);
                         caller.showNotification();
                     }
@@ -146,29 +146,6 @@ public final class Server {
         return ip;
     }
 
-    private class NotificationCaller {
 
-        private Notification notification;
-        private int id = 0;
-
-        public NotificationCaller() {
-        }
-
-        public void setTitleAndContent(String title, String content) {
-            notification = new Notification.Builder(activity)
-                    .setContentTitle(title)
-                    .setAutoCancel(true)
-                    .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-                    .setContentText(content)
-                    .setSmallIcon(R.drawable.calendar_icon)
-                    .setAutoCancel(true).getNotification();
-        }
-
-        public void showNotification() {
-            NotificationManager manager = (NotificationManager) activity.getSystemService(Context.NOTIFICATION_SERVICE);
-            manager.notify(id, notification);
-            id++;
-        }
-    }
 
 }
