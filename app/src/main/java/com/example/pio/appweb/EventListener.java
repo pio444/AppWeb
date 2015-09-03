@@ -7,6 +7,6 @@ import org.json.JSONObject;
  */
 public interface EventListener {
 
-    void getEventsData(JSONObject jsonObject);
+    void getEventsData();
 
 }

@@ -8,6 +8,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:name=".MyApplication"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -19,6 +20,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".EventsActivity"/>
+        <receiver android:name=".EventsActivity$Receiver" >
+            <intent-filter>
+                <action android:name="com.example.pio.AppWeb.SEND_NEW_DATA_EVENT" >
+                </action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
